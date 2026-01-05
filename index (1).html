@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAndLOS Hub</title>
+    <style>
+        /* 1. 기본 배경 및 초기화 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: #08020a; /* 미세한 보라빛 검정 */
+            color: #ffffff;
+            font-family: 'Pretendard', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 2. 가로 모드 유도 안내 (세로 모드일 때만) */
+        #warning-screen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: #08020a;
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        #warning-screen p { font-size: 1.2rem; line-height: 1.6; color: #b388ff; }
+
+        /* 가로 모드 로직 */
+        #main-content { display: none; }
+        @media (orientation: portrait) { #warning-screen { display: flex; } }
+        @media (orientation: landscape) { #main-content { display: block; } }
+
+        /* 3. 왼쪽 굵은 원형 테두리 (Fixed) */
+        .left-arc {
+            position: fixed;
+            left: -180px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 360px;
+            height: 85vh;
+            border: 8px solid rgba(160, 100, 255, 0.6); 
+            border-radius: 180px;
+            box-shadow: 0 0 40px rgba(160, 100, 255, 0.15);
+            z-index: 10;
+        }
+
+        /* 4. 첫 번째 섹션 (그라데이션 타이틀) */
+        .section-intro {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 100px;
+            text-align: center;
+        }
+
+        .main-title {
+            /* 글자 크기 대폭 확대 */
+            font-size: 6rem; 
+            font-weight: 900;
+            /* 그라데이션 효과 */
+            background: linear-gradient(to right, #ffffff, #b388ff, #6200ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* 은은한 빛 효과 */
+            filter: drop-shadow(0 0 15px rgba(179, 136, 255, 0.4));
+            letter-spacing: -2px;
+        }
+
+        /* 5. 두 번째 섹션 (Ssampon Tower 카드) */
+        .section-card {
+            height: 120vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+            padding-left: 100px;
+        }
+
+        .main-card {
+            width: 480px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 5px solid rgba(255, 255, 255, 0.15); /* 조금 더 굵게 */
+            border-radius: 50px;
+            padding: 35px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .tower-img {
+            width: 100%;
+            border-radius: 35px;
+            border: 2px solid rgba(179, 136, 255, 0.3);
+            margin-bottom: 25px;
+        }
+
+        .card-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+        .subtitle { font-size: 1.1rem; color: #b388ff; margin-bottom: 35px; opacity: 0.8; }
+
+        .copy-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #6200ea, #b388ff);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .copy-btn:hover { transform: scale(1.03); box-shadow: 0 0 25px rgba(179, 136, 255, 0.5); }
+    </style>
+</head>
+<body>
+
+    <div id="warning-screen">
+        <p>📱<br>화면을 가로로 돌려주세요.</p>
+    </div>
+
+    <div id="main-content">
+        <div class="left-arc"></div>
+
+        <section class="section-intro">
+            <h1 class="main-title">{___Scripts___}<br>NexusAndLOS</h1>
+        </section>
+
+        <section class="section-card">
+            <div class="main-card">
+                <img src="https://gcdnb.pbrd.co/images/LkK1dhCfqW4h.jpg?o=1" alt="Ssampon Tower" class="tower-img">
+                
+                <h1 class="card-title">Ssampon Tower</h1>
+                <p class="subtitle">God, Allkill, Fly, Motion, Loopkill</p>
+                
+                <button class="copy-btn" onclick="copyScript()">Copy Script</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function copyScript() {
+            const script = 'loadstring(game:HttpGet("https://pastebin.com/raw/CQFxRpui"))()';
+            navigator.clipboard.writeText(script).then(() => {
+                alert('스크립트가 복사되었습니다!');
+            });
+        }
+    </script>
+</body>
+</html>
